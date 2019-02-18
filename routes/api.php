@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Http\Request;
+use App\Http\Controllers\ProductController;
 
 
 Route::group(['prefix' => 'auth'], function () {
@@ -13,3 +14,6 @@ Route::group(['prefix' => 'auth'], function () {
     });
     
 });
+
+Route::apiResource('Products', 'ProductController');
+Route::apiResource('Cart', 'CartController');

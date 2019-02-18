@@ -52,7 +52,7 @@ class AuthController extends Controller
             'password' => 'required|string',
             'remember_me' => 'boolean',
         ]);
-        
+
         $credentials = request(['email', 'password']);
         if (!Auth::attempt($credentials)) {
             return response()->json([
@@ -64,7 +64,7 @@ class AuthController extends Controller
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
         if ($request->remember_me) {
-            $token->expires_at = Carbon::now()->addWeeks(1);
+            $token->expires_at = Carbon::now()->addWeeks(4);
         }
 
         $token->save();
