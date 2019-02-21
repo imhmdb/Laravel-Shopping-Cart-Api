@@ -32,7 +32,7 @@ This Project was built as a simple backend task that would allow me to earn the 
 ## Language, Framework, and Datastore. Choices Made!
   - This System is implemented using php laravel framework
   - Mysql is used as a Database for this application
-  - The Cart data is persisted in the Database to be in-compliance with the RESTfulness Guidelines and best practices and avoid using the sessions to save the state of the user ([Why it's a bad thing to use sessions in a RESTful Api](https://stackoverflow.com/a/20311981)), I also Avoided using the cookies to be the only holder of the cart data for the huge marketing benifits of tracking down users Cart data and using it to bug them with what products they forgot in thier carts.
+  - The Cart data is persisted in the Database to be in-compliance with the RESTfulness Guidelines and best practices and avoid using the sessions to save the state of the user ([Why it's a bad thing to use sessions in a RESTful Api](https://stackoverflow.com/a/20311981)), I also Avoided using the cookies to be the only holder of the cart data becuase cookies can hold only a small amount of data and also for the huge marketing benifits of tracking down users Cart data and using it to bug them with what products they forgot in thier carts.
 
 
 
@@ -41,10 +41,10 @@ This Project was built as a simple backend task that would allow me to earn the 
 
 # Installation
 
-Install the dependencies and start the server.
+Install the dependencies and start the server to test the Api.
 
 ```sh
-$ Composer intall
+$ Composer install
 $ php artisan key:generate
 $ php artisan migrate
 $ php artisan passport:keys
