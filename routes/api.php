@@ -16,5 +16,5 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::apiResource('products', 'ProductController');
-Route::apiResource('cart', 'CartController');
-Route::post('/cart/{Cart}', 'CartController@addProducts')->name('Add Products');
+Route::apiResource('carts', 'CartController');
+Route::post('/carts/{cart}', 'CartController@addProducts')->name('Add Products');
