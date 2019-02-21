@@ -5,7 +5,7 @@ use App\Http\Controllers\ProductController;
 
 Route::group(['prefix' => 'auth'], function () {
 
-    Route::post('login', 'AuthController@login');
+    Route::post('login', 'AuthController@login')->name('login');
     Route::post('signup', 'AuthController@signup');
   
     Route::group(['middleware' => 'auth:api'], function() {
@@ -15,5 +15,6 @@ Route::group(['prefix' => 'auth'], function () {
     
 });
 
-Route::apiResource('Products', 'ProductController');
-Route::apiResource('Cart', 'CartController');
+Route::apiResource('products', 'ProductController');
+Route::apiResource('cart', 'CartController');
+Route::post('/cart/{Cart}', 'CartController@addProducts')->name('Add Products');

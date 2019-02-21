@@ -25,7 +25,13 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cart = Cart::create(['id' => md5(uniqid(rand(), true)) , 'key' => md5(uniqid(rand(), true)) ]);
+        return response()->json([
+            'Message' => 'A new cart have been created for you!',
+            'CartToken' => $cart->id,
+            'CartKey' => $cart->key
+        ], 201);
+
     }
 
     /**
@@ -61,4 +67,17 @@ class CartController extends Controller
     {
         //
     }
+
+     /**
+      * Adds Products to the given Cart;
+      *
+      * @param  \Illuminate\Http\Request  $request
+      * @param  \App\Cart  $cart
+      * @return void
+      */
+    public function addProducts(Cart $cart,Request $request)
+    {
+        //
+    }
+    
 }
