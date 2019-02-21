@@ -4,22 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\CartItem;
+use App\Http\Resources\CartItemCollection as CartItemCollection;
 use App\Product;
+use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -29,9 +22,15 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+        if (Auth::guard('api')->check()) {
+            $userID = auth('api')->user()->getKey();
+        }
+
         $cart = Cart::create([
             'id' => md5(uniqid(rand(), true)),
             'key' => md5(uniqid(rand(), true)),
+            'userID' => isset($userID) ? $userID : null,
+
         ]);
         return response()->json([
             'Message' => 'A new cart have been created for you!',
@@ -47,21 +46,32 @@ class CartController extends Controller
      * @param  \App\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function show(Cart $cart)
+    public function show(Cart $cart, Request $request)
     {
-        //
-    }
+        $validator = Validator::make($request->all(), [
+            'cartKey' => 'required',
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Cart $cart)
-    {
-        //
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors(),
+            ], 400);
+        }
+
+        $cartKey = $request->input('cartKey');
+        if ($cart->key == $cartKey) {
+            return response()->json([
+                'cart' => $cart->id,
+                'Items in Cart' => new CartItemCollection($cart->items),
+            ], 200);
+
+        } else {
+
+            return response()->json([
+                'message' => 'The CarKey you provided does not match the Cart Key for this Cart.',
+            ], 400);
+        }
+
     }
 
     /**
@@ -126,6 +136,18 @@ class CartController extends Controller
                 'message' => 'The CarKey you provided does not match the Cart Key for this Cart.',
             ], 400);
         }
+
+    }
+
+    /**
+     * checkout the cart Items and create and order.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Cart  $cart
+     * @return void
+     */
+    public function checkout(Cart $cart, Request $request)
+    {
 
     }
 
