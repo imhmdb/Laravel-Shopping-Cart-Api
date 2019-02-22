@@ -17,7 +17,6 @@ class CreateCartsTable extends Migration
             $table->string('id');
             $table->string('key');
             $table->unsignedInteger('userID')->nullable();
-            $table->longText('content')->nullable();
             $table->nullableTimestamps();
             $table->primary('id');
         });

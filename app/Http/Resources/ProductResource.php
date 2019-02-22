@@ -18,6 +18,7 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'Name' => $this->Name,
             'Category' => $this->Category,
+            'price' => $this->price,
             'InStock' => $this->UnitsInStock>0 ? true:false,
         ];
     }

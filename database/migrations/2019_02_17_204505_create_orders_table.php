@@ -18,8 +18,9 @@ class CreateOrdersTable extends Migration
             $table->longText('products');
             $table->decimal('totalPrice');
             $table->unsignedInteger('userID')->nullable();
+            $table->String('name');
             $table->text('address');
-            $table->String('paymentMethod');
+            $table->String('transactionID');
             $table->timestamps();
         });
     }

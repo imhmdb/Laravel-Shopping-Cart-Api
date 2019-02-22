@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('sku');
             $table->string('Name');
+            $table->decimal('price');
             $table->text('description');
             $table->string('Category');
             $table->integer('UnitsInStock');
