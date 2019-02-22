@@ -45,17 +45,29 @@ All API End points and documentation can be found at:
 [This link](https://documenter.getpostman.com/view/6582263/S11EvLJP).
 
 The following is just a simple list of the api end points:
+
 >POST /api/auth/signup
+
 >POST /api/auth/login
+
 >GET /api/auth/logout
+
 >GET /api/products/
+
 >GET /api/products/:id
+
 >POST /api/carts/
+
 >GET /api/carts/:CartToken
+
 >POST /api/carts/:CartToken
+
 >POST /api/carts/:CartToken/checkout
+
 >DEL /api/carts/:CartToken
+
 >GET /api/orders
+
 >GET /api/orders/:orderID
 
 
